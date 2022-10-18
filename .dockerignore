@@ -1,0 +1,7 @@
+.vscode
+.gitignore
+.DS_Store
+node_modules
+npm-debug.log
+docs
+.jpeg

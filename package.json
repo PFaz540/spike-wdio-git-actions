@@ -1,0 +1,33 @@
+{
+  "name": "spike-wdio-git-actions",
+  "version": "1.0.0",
+  "description": "proof of concept for webdriver io tests",
+  "main": "get_specs.js",
+  "scripts": {
+    "test": "wdio ./config/wdio.conf.js",
+    "test:local": "wdio ./config/local.conf.js"
+  },
+  "dependencies": {
+    "@wdio/cli": "7.23.0"
+  },
+  "devDependencies": {
+    "@wdio/allure-reporter": "^7.24.0",
+    "@wdio/junit-reporter": "^7.24.0",
+    "@wdio/local-runner": "7.23.0",
+    "@wdio/mocha-framework": "7.23.0",
+    "@wdio/selenium-standalone-service": "7.23.0",
+    "@wdio/spec-reporter": "7.23.0",
+    "allure-commandline": "^2.18.1",
+    "yaml": "^2.1.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PFaz540/spike-wdio-git-actions.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PFaz540/spike-wdio-git-actions/issues"
+  },
+  "homepage": "https://github.com/PFaz540/spike-wdio-git-actions#readme"
+}
