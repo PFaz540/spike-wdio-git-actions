@@ -3,18 +3,20 @@ version: "3"
 services:
   selenium-hub:
     image: selenium/hub:4.5.0
-    container_name: selenium-hub
     ports:
       - "4442:4442"
       - "4443:4443"
       - "4444:4444"
     healthcheck:
       test: [ "CMD-SHELL", "/opt/bin/check-grid.sh" ]
-      interval: 15s
-      timeout: 90s
-      retries: 3
+      interval: 10s
+      timeout: 30s
+      retries: 10
     environment:
       - START_XVFB=false
+      # https://docs.oracle.com/javase/7/docs/api/java/util/logging/Level.html
+      # Log Levels: FINEST | FINER | FINE | CONFIG | INFO | WARNING | SEVERE
+      - SE_OPTS=--log-level SEVERE
 
   # chrome:
   #   image: selenium/node-chrome:106.0
@@ -37,6 +39,9 @@ services:
       - SE_EVENT_BUS_HOST=selenium-hub
       - SE_EVENT_BUS_PUBLISH_PORT=4442
       - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+      # https://docs.oracle.com/javase/7/docs/api/java/util/logging/Level.html
+      # Log Levels: FINEST | FINER | FINE | CONFIG | INFO | WARNING | SEVERE
+      - SE_OPTS=--log-level SEVERE
     deploy:
       replicas: 2
 
