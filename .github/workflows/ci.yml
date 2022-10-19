@@ -1,26 +1,29 @@
-name: "CI"
-
 on:
   pull_request:
   push:
-
 jobs:
   e2e-tests:
     runs-on: ubuntu-latest
     steps:
-      # Checkout the code for GitHub Actions
-      - name: Checkout Code
+      - name: Check out code
         uses: actions/checkout@v3
 
-      # Use docker-compose to handle browser installations and test execution
-      - name: Execute WDIO Tests Via Docker Compose
+      - name: Run Docker Compose
         run: docker-compose up --abort-on-container-exit
 
-      # Upload Test Reports
       - name: Test Reports
-        uses: actions/upload-artifact@v2
-        # Will run this job regardless if this whole 'step' passes or fails
+        uses: phoenix-actions/test-reporting@v8
         if: success() || failure()
         with:
-          name: wdio-test-results
+          name: JEST Tests
           path: reports/wdio-report-*.xml
+          reporter: jest-junit
+          only-summary: "true"
+          fail-on-error: "true"
+
+      - name: Upload Tests
+        uses: actions/upload-artifact@v2
+        if: success()
+        with:
+          name: Test Artifacts
+          path: reports/*.xml
