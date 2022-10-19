@@ -1,0 +1,26 @@
+name: "CI"
+
+on:
+  pull_request:
+  push:
+
+jobs:
+  e2e-tests:
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout the code for GitHub Actions
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      # Use docker-compose to handle browser installations and test execution
+      - name: Execute WDIO Tests Via Docker Compose
+        run: docker-compose up --abort-on-container-exit
+
+      # Upload Test Reports
+      - name: Test Reports
+        uses: actions/upload-artifact@v2
+        # Will run this job regardless if this whole 'step' passes or fails
+        if: success() || failure()
+        with:
+          name: wdio-test-results
+          path: reports/wdio-report-*.xml
