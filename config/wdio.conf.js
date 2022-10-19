@@ -1,7 +1,7 @@
 exports.config = {
     hostname: process.env.HUB_HOST,
     specs: [
-        './tests/av_prod.spec.js'
+        './tests/*.spec.js'
     ],
     maxInstances: 10,
     capabilities: [{

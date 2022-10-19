@@ -31,6 +31,6 @@ This tells Docker to look for a `docker-compose.yml` file which has all the Dock
    - Our browser nodes (Chrome, FireFox etc.)
    - Our WDIO test code in this very repo
 
-We also tell Docker to shutdown the containers once the tests have successfully finished..
+We also tell Docker to shutdown the containers once the tests have successfully finished.
 Once the tests are running, you can view the local instance of Selenium Hub in your browser by navigating to: http://localhost:4444/ui/index.html
 The Selenium Hub will also shutdown once the tests have finished.
