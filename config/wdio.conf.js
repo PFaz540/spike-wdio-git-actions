@@ -4,18 +4,35 @@ exports.config = {
         './tests/*.spec.js'
     ],
     maxInstances: 10,
-    capabilities: [{
-        hostname: process.env.HUB_HOST,
-        browserName: "firefox",
-        acceptInsecureCerts: true,
-        "moz:firefoxOptions": {
-            "args": [
-                "--headless",
-                "-width=1920",
-                "-height=1080"
-            ]
-        }
-    }],
+    capabilities: [
+        {
+            hostname: process.env.HUB_HOST,
+            browserName: "firefox",
+            acceptInsecureCerts: true,
+            "moz:firefoxOptions": {
+                "args": [
+                    "--headless",
+                    "-width=1920",
+                    "-height=1080"
+                ]
+            }
+        },
+        // {
+        //     hostname: process.env.HUB_HOST,
+        //     browserName: "chrome",
+        //     acceptInsecureCerts: true,
+        //     "goog:chromeOptions": {
+        //         "args": [
+        //             "--no-sandbox",
+        //             // "--disable-infobars",
+        //             "--headless",
+        //             // "--disable-gpu",
+        //             "--disable-dev-shm-usage",
+        //             // "--window-size=1920,1080",
+        //         ]
+        //     }
+        // },
+    ],
     // Level of logging verbosity: trace | debug | info | warn | error | silent
     logLevel: 'trace',
     bail: 0,
