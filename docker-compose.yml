@@ -55,6 +55,8 @@ services:
       - ./screenshots:/e2e/screenshots
       - ./config:/e2e/config
       - ./tests:/e2e/tests
+      - ./reports:/e2e/reports
+      - ./allure-results:/e2e/allure-results
     depends_on:
       selenium-hub:
         condition: service_healthy
