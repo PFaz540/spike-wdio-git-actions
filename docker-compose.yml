@@ -62,4 +62,4 @@ services:
         condition: service_healthy
     environment:
       - HUB_HOST=selenium-hub
-    entrypoint: [ "npm", "test" ]
+    entrypoint: [ "npm", "run" ]
