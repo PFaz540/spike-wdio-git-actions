@@ -1,3 +1,4 @@
+# https://github.com/actions
 name: Run WebdriverIO tests
 
 on:
@@ -10,13 +11,21 @@ on:
 jobs:
   e2e-tests:
     runs-on: ubuntu-latest
-    container:
-      image: selenium/standalone-chrome
     steps:
-      # - uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: "16"
+          node-version: 16
           cache: "npm"
-      - run: npm install
-      - run: npm test -- --spec=./tests/av_prod.spec.js
+      - name: Install
+        run: npm ci
+      - name: Test
+        run: npm run test -- --spec=./tests/av_prod.spec.js
+      - uses: actions/upload-artifact@v3
+        with:
+          name: reports
+          path: |
+            reports/*.xml
+            allure-results/*.xml
+            allure-results/*.png
