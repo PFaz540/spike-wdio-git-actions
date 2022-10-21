@@ -20,6 +20,9 @@ jobs:
           reporter: jest-junit
           only-summary: "true"
           fail-on-error: "true"
+          list-suites: "all"
+          list-tests: "all"
+          max-annotations: 10
 
       - name: Upload Tests
         uses: actions/upload-artifact@v2
