@@ -1,4 +1,4 @@
-const masterConfig = require("./wdio.conf").config;
+const masterConfig = require("./ci.conf").config;
 
 exports.config = {
     ...masterConfig,
