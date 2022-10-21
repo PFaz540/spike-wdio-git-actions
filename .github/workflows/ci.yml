@@ -35,7 +35,9 @@ jobs:
             allure-results/*.png
             screenshots/*png
       - name: Display JUnit Report
-        uses: dorny/test-reporter@v1
+        uses: phoenix-actions/test-reporting@v8
+        id: junit-reports
+        if: success() || failure()
         with:
           name: WebdriverIO Junit Reports
           path: reports/*.xml
@@ -44,6 +46,9 @@ jobs:
           list-tests: all
           max-annotations: 10
           fail-on-error: true
+      - name: Read output variables
+        run: |
+          echo "${{ steps.test-report.outputs.runHtmlUrl }}"
       - name: Generate Allure Report
         uses: simple-elf/allure-report-action@master
         if: always()
