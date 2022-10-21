@@ -13,13 +13,13 @@ jobs:
         uses: docker://selenium/standalone-chrome
 
       - name: Install Dependencies
-      - uses: actions/setup-node@v3
+        uses: actions/setup-node@v3
         with:
           node-version: "16"
         run: npm Install
 
       - name: Run tests
-      - uses: actions/setup-node@v3
+        uses: actions/setup-node@v3
         with:
           node-version: "16"
         run: npm run test
