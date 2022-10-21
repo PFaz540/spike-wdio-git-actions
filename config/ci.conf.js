@@ -7,19 +7,32 @@ exports.config = {
     capabilities: [
         {
             hostname: process.env.HUB_HOST,
-            browserName: "chrome",
+            browserName: "firefox",
             acceptInsecureCerts: true,
-            "goog:chromeOptions": {
+            "moz:firefoxOptions": {
+                "log": { "level": "WARN" },
                 "args": [
-                    "--no-sandbox",
-                    "--disable-infobars",
                     "--headless",
-                    "--disable-gpu",
-                    "--disable-dev-shm-usage",
-                    "--window-size=1920,1080",
+                    "-width=1920",
+                    "-height=1080"
                 ]
             }
-        }
+        },
+        // {
+        //     hostname: process.env.HUB_HOST,
+        //     browserName: "chrome",
+        //     acceptInsecureCerts: true,
+        //     "goog:chromeOptions": {
+        //         "args": [
+        //             "--no-sandbox",
+        //             // "--disable-infobars",
+        //             "--headless",
+        //             // "--disable-gpu",
+        //             "--disable-dev-shm-usage",
+        //             // "--window-size=1920,1080",
+        //         ]
+        //     }
+        // },
     ],
     // Level of logging verbosity: trace | debug | info | warn | error | silent
     logLevel: "error",

@@ -1,7 +1,6 @@
 on:
   pull_request:
   push:
-
 jobs:
   e2e-tests:
     runs-on: ubuntu-latest
@@ -9,28 +8,22 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v3
 
-      - name: Pull Chrome
-        uses: docker://selenium/standalone-chrome
+      - name: Run Docker Compose
+        run: docker-compose up --abort-on-container-exit
 
-      - name: Install Dependencies
-        run: npm Install
+      - name: Test Reports
+        uses: phoenix-actions/test-reporting@v8
+        if: success() || failure()
+        with:
+          name: WDIO - JUNIT Report
+          path: reports/wdio-report-*.xml
+          reporter: jest-junit
+          only-summary: "true"
+          fail-on-error: "true"
 
-      - name: Run tests
-        run: npm run test
-
-      # - name: Test Reports
-      #   uses: phoenix-actions/test-reporting@v8
-      #   if: success() || failure()
-      #   with:
-      #     name: WDIO - JUNIT Report
-      #     path: reports/wdio-report-*.xml
-      #     reporter: jest-junit
-      #     only-summary: "false"
-      #     fail-on-error: "true"
-
-      # - name: Upload Tests
-      #   uses: actions/upload-artifact@v2
-      #   if: success()
-      #   with:
-      #     name: Test Artifacts
-      #     path: reports/*.xml
+      - name: Upload Tests
+        uses: actions/upload-artifact@v2
+        if: success()
+        with:
+          name: Test Artifacts
+          path: reports/*.xml
