@@ -16,15 +16,19 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+
       - name: Set up Node
         uses: actions/setup-node@v3
         with:
           node-version: 16
           cache: "npm"
+
       - name: NPM Install
         run: npm ci
+
       - name: Execute WDIO Tests
         run: npm run test
+
       - name: Upload Report Artifacts
         uses: actions/upload-artifact@v3
         with:
@@ -34,6 +38,7 @@ jobs:
             allure-results/*.xml
             allure-results/*.png
             screenshots/*png
+
       - name: Display JUnit Report
         uses: phoenix-actions/test-reporting@v8
         id: junit-reports
@@ -46,6 +51,7 @@ jobs:
           list-tests: all
           max-annotations: 10
           fail-on-error: true
+
       - name: Generate Allure Report
         uses: simple-elf/allure-report-action@master
         if: always()
@@ -59,6 +65,7 @@ jobs:
           github_run_id: ${{ github.run_id }}
           github_repo: ${{ github.repository }}
           github_repo_owner: ${{ github.repository_owner }}
+
       - name: Deploy report to Github Pages
         if: always()
         uses: peaceiris/actions-gh-pages@v2
