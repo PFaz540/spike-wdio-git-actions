@@ -4,5 +4,7 @@ node_modules
 *.log
 *.xml
 allure-report
-allure-results
+allure-results/*.xml
+allure-results/*.png
+public
 *.env
