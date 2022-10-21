@@ -1,32 +1,20 @@
+name: Run WebdriverIO tests
+
 on:
-  pull_request:
   push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
 jobs:
   e2e-tests:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out code
-        uses: actions/checkout@v3
-
-      - name: Run Docker Compose
-        run: docker-compose up --abort-on-container-exit
-
-      - name: Test Reports
-        uses: phoenix-actions/test-reporting@v8
-        if: success() || failure()
+      - uses: actions/checkout@v3
+      - name: Use Node.js
+        uses: actions/setup-node@v3
         with:
-          name: WDIO - JUNIT Report
-          path: reports/wdio-report-*.xml
-          reporter: jest-junit
-          only-summary: "true"
-          fail-on-error: "true"
-          list-suites: "all"
-          list-tests: "all"
-          max-annotations: 10
-
-      - name: Upload Tests
-        uses: actions/upload-artifact@v2
-        if: success()
-        with:
-          name: Test Artifacts
-          path: reports/*.xml
+          node-version: "16"
+          cache: "npm"
+      - run: npm ci
+      - run: npm test -- --spec=./tests/av_prod.spec.js
