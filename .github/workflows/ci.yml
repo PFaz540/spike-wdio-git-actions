@@ -1,4 +1,6 @@
+# https://github.com/marketplace?type=actions
 # https://github.com/actions
+
 name: Run WebdriverIO tests
 
 on:
@@ -14,18 +16,51 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - name: Set up Node
+        uses: actions/setup-node@v3
         with:
           node-version: 16
           cache: "npm"
-      - name: Install
+      - name: NPM Install
         run: npm ci
-      - name: Test
-        run: npm run test -- --spec=./tests/av_prod.spec.js
-      - uses: actions/upload-artifact@v3
+      - name: Execute WDIO Tests
+        run: npm run test
+      - name: Upload Report Artifacts
+        uses: actions/upload-artifact@v3
         with:
           name: reports
           path: |
             reports/*.xml
             allure-results/*.xml
             allure-results/*.png
+            screenshots/*png
+      - name: Display JUnit Report
+        uses: dorny/test-reporter@v1
+        with:
+          name: WebdriverIO Junit Reports
+          path: reports/*.xml
+          reporter: jest-junit
+          list-suites: all
+          list-tests: all
+          max-annotations: 10
+          fail-on-error: true
+      - name: Generate Allure Report
+        uses: simple-elf/allure-report-action@master
+        if: always()
+        id: allure-report
+        with:
+          allure_results: build/allure-results
+          gh_pages: gh-pages
+          allure_report: allure-report
+          allure_history: allure-history
+          github_run_num: ${{ github.run_number }}
+          github_run_id: ${{ github.run_id }}
+          github_repo: ${{ github.repository }}
+          github_repo_owner: ${{ github.repository_owner }}
+      - name: Deploy report to Github Pages
+        if: always()
+        uses: peaceiris/actions-gh-pages@v2
+        env:
+          PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PUBLISH_BRANCH: gh-pages
+          PUBLISH_DIR: allure-history
