@@ -9,7 +9,6 @@ exports.config = {
     maxInstances: 1,
     capabilities: [
         {
-            hostname: process.env.HUB_HOST,
             browserName: "chrome",
             acceptInsecureCerts: true,
             "goog:chromeOptions": {
