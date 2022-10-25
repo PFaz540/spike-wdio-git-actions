@@ -17,74 +17,77 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Set up Node
-        uses: actions/setup-node@v3
-        with:
-          node-version: 16
-          cache: "npm"
+      - name: Docker Compose
+        uses: isbang/compose-action@v1.3.2
 
-      - name: NPM Install
-        run: npm ci
+      # - name: Set up Node
+      #   uses: actions/setup-node@v3
+      #   with:
+      #     node-version: 16
+      #     cache: "npm"
 
-      - name: Execute WDIO Tests
-        run: npm run test
+      # - name: NPM Install
+      #   run: npm ci
 
-      - name: Upload Report Artifacts
-        uses: actions/upload-artifact@v3
-        with:
-          name: reports
-          path: |
-            reports/*.xml
-            allure-results/*.xml
-            allure-results/*.png
-            screenshots/*png
+      # - name: Execute WDIO Tests
+      #   run: npm run test
 
-      - name: Display JUnit Report
-        uses: phoenix-actions/test-reporting@v8
-        id: junit-reports
-        if: success() || failure()
-        with:
-          name: WebdriverIO Junit Reports
-          path: reports/*.xml
-          reporter: jest-junit
-          list-suites: all
-          list-tests: all
-          max-annotations: 10
-          fail-on-error: true
+      # - name: Upload Report Artifacts
+      #   uses: actions/upload-artifact@v3
+      #   with:
+      #     name: reports
+      #     path: |
+      #       reports/*.xml
+      #       allure-results/*.xml
+      #       allure-results/*.png
+      #       screenshots/*png
 
-      - name: Get Allure history
-        uses: actions/checkout@v2
-        if: always()
-        continue-on-error: true
-        with:
-          ref: gh-pages
-          path: gh-pages
+      # - name: Display JUnit Report
+      #   uses: phoenix-actions/test-reporting@v8
+      #   id: junit-reports
+      #   if: success() || failure()
+      #   with:
+      #     name: WebdriverIO Junit Reports
+      #     path: reports/*.xml
+      #     reporter: jest-junit
+      #     list-suites: all
+      #     list-tests: all
+      #     max-annotations: 10
+      #     fail-on-error: true
 
-      - name: Generate Allure Report
-        uses: simple-elf/allure-report-action@master
-        if: always()
-        id: allure-report
-        with:
-          allure_results: allure-results
-          allure_report: allure-report
-          gh_pages: gh-pages
-          allure_history: allure-history
+      # - name: Get Allure history
+      #   uses: actions/checkout@v2
+      #   if: always()
+      #   continue-on-error: true
+      #   with:
+      #     ref: gh-pages
+      #     path: gh-pages
 
-      - name: Deploy report to Github Pages
-        if: always()
-        uses: peaceiris/actions-gh-pages@v2
-        env:
-          PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PUBLISH_BRANCH: gh-pages
-          PUBLISH_DIR: allure-history
+      # - name: Generate Allure Report
+      #   uses: simple-elf/allure-report-action@master
+      #   if: always()
+      #   id: allure-report
+      #   with:
+      #     allure_results: allure-results
+      #     allure_report: allure-report
+      #     gh_pages: gh-pages
+      #     allure_history: allure-history
 
-      - name: Post the link to the report
-        if: always()
-        uses: Sibz/github-status-action@v1
-        with:
-          authToken: ${{secrets.GITHUB_TOKEN}}
-          context: "Test report"
-          description: "Passed"
-          state: "success"
-          sha: ${{github.event.pull_request.head.sha || github.sha}}
-          target_url: simple-elf.github.io/github-allure-history/${{ github.run_number }}
+      # - name: Deploy report to Github Pages
+      #   if: always()
+      #   uses: peaceiris/actions-gh-pages@v2
+      #   env:
+      #     PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #     PUBLISH_BRANCH: gh-pages
+      #     PUBLISH_DIR: allure-history
+
+      # - name: Post the link to the report
+      #   if: always()
+      #   uses: Sibz/github-status-action@v1
+      #   with:
+      #     authToken: ${{secrets.GITHUB_TOKEN}}
+      #     context: "Test report"
+      #     description: "Passed"
+      #     state: "success"
+      #     sha: ${{github.event.pull_request.head.sha || github.sha}}
+      #     target_url: simple-elf.github.io/github-allure-history/${{ github.run_number }}
