@@ -97,18 +97,17 @@ jobs:
       matrix:
         run: ["av_prod.spec.js", "g4m_prod.spec.js"]
     steps:
-    - name: Checkout
-      uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v3
 
-    - name: Set up Node
-      uses: actions/setup-node@v3
-      with:
-        node-version: 16
-        cache: "npm"
+      - name: Set up Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: "npm"
 
-    - name: NPM Install
-      run: npm ci
+      - name: NPM Install
+        run: npm ci
 
-    - name: Execute WDIO Tests
-      - run: npm test -- --spec=./tests/${{ matrix.run }}
-
+      - name: Execute WDIO Tests
+        run: npm test -- --spec=./tests/${{ matrix.run }}
