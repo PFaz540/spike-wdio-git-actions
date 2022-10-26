@@ -42,8 +42,8 @@ exports.config = {
         "spec",
         ["junit", {
             outputDir: "./reports",
-            outputFileFormat: function (options) { // optional
-                return `wdio-report-${options.cid}.xml`
+            outputFileFormat: function () { // optional
+                return `report-${Date.now()}.xml`
             }
         }],
         ["allure", {

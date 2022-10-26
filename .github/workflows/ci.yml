@@ -132,3 +132,16 @@ jobs:
             allure-results/*.xml
             allure-results/*.png
             screenshots/*png
+
+      - name: Display JUnit Report
+        uses: phoenix-actions/test-reporting@v8
+        id: junit-reports
+        if: success() || failure()
+        with:
+          name: WebdriverIO Junit Reports
+          path: reports/*.xml
+          reporter: jest-junit
+          list-suites: all
+          list-tests: all
+          max-annotations: 10
+          fail-on-error: true
