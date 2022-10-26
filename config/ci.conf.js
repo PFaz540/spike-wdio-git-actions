@@ -7,17 +7,10 @@ exports.config = {
     capabilities: [
         {
             hostname: process.env.HUB_HOST,
-            browserName: "chrome",
+            browserName: "firefox",
             acceptInsecureCerts: true,
-            "goog:chromeOptions": {
-                "args": [
-                    "--no-sandbox",
-                    "--disable-infobars",
-                    "--headless",
-                    "--disable-gpu",
-                    "--disable-dev-shm-usage",
-                    "--window-size=1920,1080",
-                ]
+            "moz:firefoxOptions": {
+                "args": ["--headless"]
             }
         }
     ],
