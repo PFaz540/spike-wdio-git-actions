@@ -95,7 +95,18 @@ jobs:
       fail-fast: true
       max-parallel: 2
       matrix:
-        run: ["av_prod.spec.js", "g4m_prod.spec.js"]
+        run:
+          [
+            "av_prod.spec.js",
+            "cash_converters.spec.js",
+            "curly_music.spec.js",
+            "ebay.spec.js",
+            "g4m_prod.spec.js",
+            "guitarguitar.spec.js",
+            "hmv.spec.js",
+            "normans.spec.js",
+            "pmt.spec.js",
+          ]
     steps:
       - name: Checkout
         uses: actions/checkout@v3
