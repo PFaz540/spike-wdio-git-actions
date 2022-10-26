@@ -7,12 +7,27 @@ exports.config = {
     capabilities: [
         {
             hostname: process.env.HUB_HOST,
-            browserName: "firefox",
-            acceptInsecureCerts: true,
-            "moz:firefoxOptions": {
-                "args": ["--headless"]
+            "browserName": "chrome",
+            "goog:chromeOptions": {
+                "args": [
+                    "--no-sandbox",
+                    "--disable-dev-shm-usage",
+                    "--headless",
+                    "--disable-gpu",
+                    "--disable-infobars",
+                    "--disable-browser-side-navigation",
+                    "--window-size=1920,1080",
+                ]
             }
-        }
+        },
+        // {
+        //     hostname: process.env.HUB_HOST,
+        //     browserName: "firefox",
+        //     acceptInsecureCerts: true,
+        //     "moz:firefoxOptions": {
+        //         "args": ["--headless"]
+        //     }
+        // }
     ],
     // Level of logging verbosity: trace | debug | info | warn | error | silent
     logLevel: "error",
