@@ -122,3 +122,13 @@ jobs:
 
       - name: Execute WDIO Tests
         run: npm test -- --spec=./tests/${{ matrix.run }}
+
+      - name: Upload Report Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: reports
+          path: |
+            reports/*.xml
+            allure-results/*.xml
+            allure-results/*.png
+            screenshots/*png
