@@ -56,10 +56,12 @@ jobs:
           name: reports
           path: reports.zip
 
+      - name: Unzip reports.zip
+        run: unzip reports.zip
+
       - name: Display JUnit Report
         uses: phoenix-actions/test-reporting@v8
         id: junit-reports
-        run: unzip reports.zip
         with:
           name: WebdriverIO Junit Reports
           path: reports/*.xml
