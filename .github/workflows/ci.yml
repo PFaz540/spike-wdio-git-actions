@@ -38,11 +38,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: reports
-          path: |
-            reports/*.xml
-            allure-results/*.xml
-            allure-results/*.png
-            screenshots/*png
+          path: reports/*.xml
 
   junit-report:
     needs: wdio-tests
@@ -59,6 +55,7 @@ jobs:
       - name: Display JUnit Report
         uses: phoenix-actions/test-reporting@v8
         id: junit-reports
+        run:
         with:
           name: WebdriverIO Junit Reports
           path: reports/*.xml
