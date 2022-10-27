@@ -54,21 +54,17 @@ jobs:
       - name: Download Artifacts
         uses: actions/download-artifact@v3
         with:
-          path: test-artifacts.zip
+          name: test-artifacts
 
-      - name: Unzip reports.zip
-        run: |
-          sudo apt-get install unzip
-          pwd
-          ls
-          unzip test-artifacts.zip
+      - name: Display structure of downloaded files
+        run: unzip test-artifacts.zip
 
       - name: Display JUnit Report
         uses: phoenix-actions/test-reporting@v8
         id: junit-reports
         with:
           name: WebdriverIO Junit Reports
-          path: /test-artifacts/reports
+          path: /reports
           reporter: jest-junit
           list-suites: all
           list-tests: all
