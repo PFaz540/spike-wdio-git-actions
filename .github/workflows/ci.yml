@@ -57,7 +57,10 @@ jobs:
           path: test-artifacts.zip
 
       - name: Unzip reports.zip
-        run: unzip /home/runner/work/spike-wdio-git-actions/spike-wdio-git-actions/test-artifacts.zip
+        run: |
+          pwd
+          ls
+          unzip /home/runner/work/spike-wdio-git-actions/spike-wdio-git-actions/test-artifacts.zip
 
       - name: Display JUnit Report
         uses: phoenix-actions/test-reporting@v8
