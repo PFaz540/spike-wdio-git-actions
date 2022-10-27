@@ -44,7 +44,7 @@ jobs:
             allure-results/*.png
             screenshots/*png
 
-  reports:
+  junit-report:
     needs: wdio-tests
     runs-on: ubuntu-latest
     steps:
