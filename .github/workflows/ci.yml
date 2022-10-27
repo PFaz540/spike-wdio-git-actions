@@ -56,8 +56,11 @@ jobs:
         with:
           name: test-artifacts
 
-      - name: Display structure of downloaded files
-        run: unzip test-artifacts.zip
+      - name: Unzip Artifacts
+        run: |
+          pwd
+          ls -R
+          unzip test-artifacts.zip
 
       - name: Display JUnit Report
         uses: phoenix-actions/test-reporting@v8
