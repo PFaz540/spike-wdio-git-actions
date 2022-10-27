@@ -13,11 +13,7 @@ exports.config = {
             acceptInsecureCerts: true,
             "goog:chromeOptions": {
                 "args": [
-                    "--no-sandbox",
-                    "--disable-infobars",
-                    "--headless",
-                    "--disable-gpu",
-                    "--disable-dev-shm-usage",
+                    // "--headless",
                     "--window-size=1920,1080",
                 ]
             }

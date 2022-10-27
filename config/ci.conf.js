@@ -19,15 +19,7 @@ exports.config = {
                     "--window-size=1920,1080",
                 ]
             }
-        },
-        // {
-        //     hostname: process.env.HUB_HOST,
-        //     browserName: "firefox",
-        //     acceptInsecureCerts: true,
-        //     "moz:firefoxOptions": {
-        //         "args": ["--headless"]
-        //     }
-        // }
+        }
     ],
     // Level of logging verbosity: trace | debug | info | warn | error | silent
     logLevel: "error",
@@ -60,21 +52,6 @@ exports.config = {
             // Optional parameter(false by default), set to true in order to attach console logs from step to the reporter.
             addConsoleLogs: true
         }],
-        [
-            "SlackReporter", {
-                slackOptions: {
-                    type: "web-api",
-                    slackName: "WebdriverIO Reporter",
-                    slackIconUrl: "https://webdriver.io/img/webdriverio.png",
-                    uploadScreenshotOfFailedCase: true,
-                    notifyDetailResultThread: false,
-                    notifyTestStartMessage: true,
-                    notifyFailedCase: true,
-                    channel: "C041LJ0FZB9",
-                    slackBotToken: "xoxb-27463153043-4286238565588-6IEn4HQvyj1nwjex3t7ugIbo"
-                },
-            }
-        ]
     ],
     mochaOpts: {
         ui: "bdd",
