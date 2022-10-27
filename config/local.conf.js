@@ -1,7 +1,7 @@
-const masterConfig = require("./ci.conf").config;
+import merge from 'deepmerge'
+import wdioConf from "./main.conf";
 
-exports.config = {
-    ...masterConfig,
+exports.config = merge(wdioConf.config, {
     hostname: "localhost",
     specs: [
         "./tests/*.spec.js"
@@ -20,5 +20,7 @@ exports.config = {
         }
     ],
     logLevel: "error",
-    services: ["selenium-standalone"]
-}
+    services: ["selenium-standalone"],
+    // Waits 20 seconds for page load or elements to appear before failing
+    waitforTimeout: 20000
+});
