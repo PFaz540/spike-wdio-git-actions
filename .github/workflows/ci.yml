@@ -63,11 +63,6 @@ jobs:
         with:
           name: test-artifacts
 
-      - name: Display Files
-        run: |
-          pwd
-          ls -R
-
       - name: Display JUnit Report
         uses: phoenix-actions/test-reporting@v8
         id: junit-reports
