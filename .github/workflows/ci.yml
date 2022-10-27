@@ -55,4 +55,4 @@ jobs:
           list-suites: all
           list-tests: all
           max-annotations: 10
-          fail-on-error: true
+          fail-on-error: false
