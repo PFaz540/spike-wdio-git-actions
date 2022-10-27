@@ -59,7 +59,22 @@ exports.config = {
             disableMochaHooks: false,
             // Optional parameter(false by default), set to true in order to attach console logs from step to the reporter.
             addConsoleLogs: true
-        }]
+        }],
+        [
+            "SlackReporter", {
+                slackOptions: {
+                    type: "web-api",
+                    slackName: "WebdriverIO Reporter",
+                    slackIconUrl: "https://webdriver.io/img/webdriverio.png",
+                    uploadScreenshotOfFailedCase: true,
+                    notifyDetailResultThread: false,
+                    notifyTestStartMessage: true,
+                    notifyFailedCase: true,
+                    channel: "C041LJ0FZB9",
+                    slackBotToken: "xoxb-27463153043-4286238565588-6IEn4HQvyj1nwjex3t7ugIbo"
+                },
+            }
+        ]
     ],
     mochaOpts: {
         ui: "bdd",
