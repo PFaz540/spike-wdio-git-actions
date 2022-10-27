@@ -3,6 +3,6 @@ describe("AV Production Tests", () => {
         await browser.url("https://www.av.com");
         const headerLogo = await $(".header-logo");
         await browser.saveScreenshot(`./screenshots/av-prod.png`);
-        await expect(headerLogo).toBeDisplayed();
+        await expect(headerLogo).not.toBeDisplayed();
     });
 });
