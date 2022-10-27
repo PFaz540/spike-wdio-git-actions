@@ -11,7 +11,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  matrix-tests:
+  wdio-tests:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: true
@@ -44,10 +44,13 @@ jobs:
             allure-results/*.png
             screenshots/*png
 
+  reports:
+    needs: wdio-tests
+    runs-on: ubuntu-latest
+    steps:
       - name: Display JUnit Report
         uses: phoenix-actions/test-reporting@v8
         id: junit-reports
-        if: success() || failure()
         with:
           name: WebdriverIO Junit Reports
           path: reports/*.xml
