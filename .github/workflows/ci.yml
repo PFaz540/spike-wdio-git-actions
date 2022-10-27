@@ -51,6 +51,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
+      - uses: actions/download-artifact@v3
+        with:
+          name: reports
+          path: reports.zip
+
       - name: Display JUnit Report
         uses: phoenix-actions/test-reporting@v8
         id: junit-reports
