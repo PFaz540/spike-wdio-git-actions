@@ -7,15 +7,15 @@ exports.config = {
     capabilities: [
         {
             hostname: process.env.HUB_HOST,
-            browserName: "chrome",
-            acceptInsecureCerts: true,
+            "browserName": "chrome",
             "goog:chromeOptions": {
                 "args": [
                     "--no-sandbox",
-                    "--disable-infobars",
+                    "--disable-dev-shm-usage",
                     "--headless",
                     "--disable-gpu",
-                    "--disable-dev-shm-usage",
+                    "--disable-infobars",
+                    "--disable-browser-side-navigation",
                     "--window-size=1920,1080",
                 ]
             }
@@ -34,8 +34,8 @@ exports.config = {
         "spec",
         ["junit", {
             outputDir: "./reports",
-            outputFileFormat: function (options) { // optional
-                return `wdio-report-${options.cid}.xml`
+            outputFileFormat: function () { // optional
+                return `report-${Date.now()}.xml`
             }
         }],
         ["allure", {
@@ -51,7 +51,7 @@ exports.config = {
             disableMochaHooks: false,
             // Optional parameter(false by default), set to true in order to attach console logs from step to the reporter.
             addConsoleLogs: true
-        }]
+        }],
     ],
     mochaOpts: {
         ui: "bdd",
