@@ -11,6 +11,10 @@
     "@wdio/cli": "^7.25.2"
   },
   "devDependencies": {
+    "@babel/cli": "^7.19.3",
+    "@babel/core": "^7.19.6",
+    "@babel/preset-env": "^7.19.4",
+    "@babel/register": "^7.18.9",
     "@moroo/wdio-slack-reporter": "^2.1.1",
     "@wdio/allure-reporter": "^7.25.2",
     "@wdio/junit-reporter": "^7.25.1",
