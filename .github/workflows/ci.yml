@@ -55,7 +55,6 @@ jobs:
       - name: Display JUnit Report
         uses: phoenix-actions/test-reporting@v8
         id: junit-reports
-        run:
         with:
           name: WebdriverIO Junit Reports
           path: reports/*.xml
