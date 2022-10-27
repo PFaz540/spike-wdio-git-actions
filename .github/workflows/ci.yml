@@ -58,9 +58,9 @@ jobs:
 
       - name: Unzip reports.zip
         run: |
-          cd reports
+          sudo apt-get install unzip
+          pwd
           ls
-          cd ..
           unzip test-artifacts.zip
 
       - name: Display JUnit Report
