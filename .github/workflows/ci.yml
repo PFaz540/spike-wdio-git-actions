@@ -37,7 +37,7 @@ jobs:
       - name: Upload Report Artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: reports
+          name: test-artifacts
           path: |
             reports/*.xml
             allure-results/*.xml
@@ -51,20 +51,20 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - uses: actions/download-artifact@v3
+      - name: Download Artifacts
+        uses: actions/download-artifact@v3
         with:
-          name: reports
-          path: reports.zip
+          path: test-artifacts.zip
 
       - name: Unzip reports.zip
-        run: unzip reports.zip
+        run: unzip /home/runner/work/spike-wdio-git-actions/spike-wdio-git-actions/test-artifacts.zip
 
       - name: Display JUnit Report
         uses: phoenix-actions/test-reporting@v8
         id: junit-reports
         with:
           name: WebdriverIO Junit Reports
-          path: reports/*.xml
+          path: /home/runner/work/spike-wdio-git-actions/spike-wdio-git-actions/reports/*.xml
           reporter: jest-junit
           list-suites: all
           list-tests: all
