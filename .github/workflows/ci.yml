@@ -60,7 +60,7 @@ jobs:
         run: |
           pwd
           ls
-          unzip test-artifacts
+          unzip /test-artifacts.zip
 
       - name: Display JUnit Report
         uses: phoenix-actions/test-reporting@v8
