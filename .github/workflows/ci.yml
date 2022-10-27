@@ -60,14 +60,14 @@ jobs:
         run: |
           pwd
           ls
-          unzip /home/runner/work/spike-wdio-git-actions/spike-wdio-git-actions/test-artifacts.zip
+          unzip test-artifacts.zip
 
       - name: Display JUnit Report
         uses: phoenix-actions/test-reporting@v8
         id: junit-reports
         with:
           name: WebdriverIO Junit Reports
-          path: /home/runner/work/spike-wdio-git-actions/spike-wdio-git-actions/reports/*.xml
+          path: /test-artifacts/reports
           reporter: jest-junit
           list-suites: all
           list-tests: all
