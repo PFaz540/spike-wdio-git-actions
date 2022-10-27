@@ -11,13 +11,20 @@ on:
   workflow_dispatch:
 
 jobs:
-  matrix-tests:
+  wdio-tests:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: true
       max-parallel: 2
       matrix:
-        run: ["av_prod.spec.js", "g4m_prod.spec.js"]
+        run:
+          [
+            "av_prod.spec.js",
+            "g4m_prod.spec.js",
+            "curly_music.spec.js",
+            "guitarguitar.spec.js",
+            "pmt.spec.js",
+          ]
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -37,17 +44,33 @@ jobs:
       - name: Upload Report Artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: reports
+          name: test-artifacts
           path: |
             reports/*.xml
             allure-results/*.xml
             allure-results/*.png
             screenshots/*png
 
+  junit-report:
+    needs: wdio-tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Download Artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: test-artifacts
+
+      - name: Display Files
+        run: |
+          pwd
+          ls -R
+
       - name: Display JUnit Report
         uses: phoenix-actions/test-reporting@v8
         id: junit-reports
-        if: success() || failure()
         with:
           name: WebdriverIO Junit Reports
           path: reports/*.xml
