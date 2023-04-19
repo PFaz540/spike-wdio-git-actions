@@ -1,6 +1,6 @@
 exports.config = {
    specs: [
-      "./tests/*.spec.js"
+      "../tests/*.spec.js"
    ],
    bail: 0,
    baseUrl: "https://www.gear4music.com",
@@ -10,12 +10,6 @@ exports.config = {
    mochaOpts: {
       ui: "bdd",
       timeout: 60000
-   },
-   autoCompileOpts: {
-      autoCompile: true,
-      babelOpts: {
-         // https://babeljs.io/docs/en/babel-register#specifying-options
-      }
    },
    reporters: ["spec"],
    afterStep: async ({ error }) => {

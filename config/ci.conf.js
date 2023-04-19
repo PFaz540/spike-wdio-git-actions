@@ -1,10 +1,10 @@
-import merge from 'deepmerge'
-import wdioConf from "./main.conf";
+const parentConfig = require("./main.conf").config;
 
-exports.config = merge(wdioConf.config, {
+exports.config = {
+    ...parentConfig,
     hostname: process.env.HUB_HOST,
     specs: [
-        "./tests/*.spec.js"
+        "../tests/*.spec.js"
     ],
     maxInstances: 1,
     capabilities: [
@@ -47,4 +47,4 @@ exports.config = merge(wdioConf.config, {
     ],
     // Waits 20 seconds for page load or elements to appear before failing
     waitforTimeout: 20000
-});
+};

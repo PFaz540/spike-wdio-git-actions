@@ -1,10 +1,10 @@
-import merge from 'deepmerge'
-import wdioConf from "./main.conf";
+const parentConfig = require("./main.conf").config;
 
-exports.config = merge(wdioConf.config, {
+exports.config = {
+    ...parentConfig,
     hostname: "localhost",
     specs: [
-        "./tests/*.spec.js"
+        "../tests/*.spec.js"
     ],
     maxInstances: 1,
     capabilities: [
@@ -19,8 +19,9 @@ exports.config = merge(wdioConf.config, {
             }
         }
     ],
+    // Level of logging verbosity: trace | debug | info | warn | error | silent
     logLevel: "error",
-    services: ["selenium-standalone"],
+    services: ["chromedriver"],
     // Waits 20 seconds for page load or elements to appear before failing
     waitforTimeout: 20000
-});
+};
